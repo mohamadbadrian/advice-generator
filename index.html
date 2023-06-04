@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+<div class="box">
+    <h4>Advice #<span id="adviceId"></span></h4>
+    <p id="adviceText"></p>
+    <div class="divider"></div>
+    <input type="button" class="btnAdvice" onclick="getDataFromApi()" />
+</div>
+  
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/mohamadbadrian">MohamadBadrian</a>.
+  </div>
+</body>
+
+<script>
+  function getDataFromApi(){
+    fetch('https://api.adviceslip.com/advice')
+  .then(function(response) {
+    return response.json()
+}).then(function(json) {
+  document.getElementById("adviceText").innerText = json.slip.advice;
+  document.getElementById("adviceId").innerText=json.slip.id;
+}).catch(function(ex) {
+  console.log("error : "+ex);
+})
+  }
+</script>
+<script>
+  //call api when page load for first time run
+    getDataFromApi();
+</script>
+</html>
